@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import LoginForm from './component/LoginForm';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+	const adminUser = {
+		name:"rohit",
+		email: "rroo@gmail.com",
+		password: "1234567890",
+		phone:  "9876543210"
+	}
 
+	const [user, setUser]= useState({name: "",email: "",phone: ""});
+	const [error, setError] = useState("");
+
+	const Login = details => {
+		console.log(details);
+		if( details.name == adminUser.name && details.email == adminUser.email && details.password == adminUser.password && details.phone == adminUser.phone){
+			alert("YOU ARE VALID USER");
+		
+		setUser({
+			name: details.name,
+			email:details.email,
+			phone:details.phone
+		});
+	}
+	else{
+		
+		setError("Details do not match");
+	}
+}
+	
+	return (
+		<div className="App">
+			{(user.email!= "")? (
+				<div className="welcome">
+					<h2>hello World</h2>
+					
+				</div>
+				 ) :(
+				 <LoginForm  Login={Login} error ={error}/>
+				 ) }
+				 </div>
+		);
+
+}
 export default App;
